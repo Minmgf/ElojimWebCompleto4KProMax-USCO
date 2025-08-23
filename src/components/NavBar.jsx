@@ -1,8 +1,9 @@
+import Link from 'next/link'
 import React from 'react'
 
 const NavBar = () => {
     return (
-        <header className="bg-white shadow-sm ">
+        <header className="bg-white shadow-sm border-b border-gray-200 ">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <div className="flex items-center space-x-3">
@@ -17,19 +18,19 @@ const NavBar = () => {
                     </div>
 
                     <nav className="hidden md:flex space-x-8">
-                        <a href="#inicio" className="text-gray-700 hover:text-blue-600 font-medium">
+                        <a href="/" className="text-gray-700 hover:text-blue-600 font-medium">
                             Inicio
                         </a>
-                        <a href="#nosotros" className="text-gray-700 hover:text-blue-600 font-medium">
+                        <a href="/#nosotros" className="text-gray-700 hover:text-blue-600 font-medium">
                             Nosotros
                         </a>
-                        <a href="programas" className="text-gray-700 hover:text-blue-600 font-medium">
+                        <Link href="/programas" className="text-gray-700 hover:text-blue-600 font-medium">
                             Programas
-                        </a>
-                        <a href="#noticias" className="text-gray-700 hover:text-blue-600 font-medium">
+                        </Link>
+                        <a href="/#noticias" className="text-gray-700 hover:text-blue-600 font-medium">
                             Noticias
                         </a>
-                        <a href="#contacto" className="text-gray-700 hover:text-blue-600 font-medium">
+                        <a href="/#contacto" className="text-gray-700 hover:text-blue-600 font-medium">
                             Contáctanos
                         </a>
                     </nav>

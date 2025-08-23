@@ -12,7 +12,6 @@ const page = () => {
       <MisionVision/>
       <ImpactAreas/>
       <News/>
-      <Footer/>
     </div>
   )
 }
