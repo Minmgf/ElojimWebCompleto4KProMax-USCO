@@ -14,6 +14,32 @@ model User {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  
+  // Relación con noticias
+  news      News[]
 
   @@map("users")
+}
+
+model News {
+  id        String   @id @default(cuid())
+  title     String   @db.VarChar(255)
+  content   String
+  category  String[]
+  important Boolean  @default(false)
+  images    String[]
+  isActive  Boolean  @default(true)
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relaciones
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  // Índices
+  @@index([isActive])
+  @@index([important])
+  @@index([createdAt])
+  @@index([category])
+  @@map("news")
 }
