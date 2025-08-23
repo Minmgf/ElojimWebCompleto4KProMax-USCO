@@ -2,8 +2,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/dashboard/tabs'
 import Link from 'next/link'
 import React from 'react'
-import { FaArrowLeft, FaListUl, FaNewspaper } from 'react-icons/fa'
+import { FaArrowLeft, FaListUl, FaNewspaper, FaSignOutAlt } from 'react-icons/fa'
 import Select from 'react-select'
+import { useSession, signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const programs = [
     { value: 'Opcion 1', label: 'Opcion 1' },
@@ -11,7 +13,32 @@ const programs = [
     { value: 'Opcion 3', label: 'Opcion 3' }
 ]
 
-const page = () => {
+const DashboardPage = () => {
+    const { data: session, status } = useSession()
+    const router = useRouter()
+
+    const handleLogout = async () => {
+        await signOut({ 
+            callbackUrl: '/',
+            redirect: true 
+        })
+    }
+
+    if (status === "loading") {
+        return (
+            <div className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-50 to-orange-50">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+                    <p className="mt-4 text-gray-600">Cargando dashboard...</p>
+                </div>
+            </div>
+        )
+    }
+
+    if (status === "unauthenticated") {
+        router.push('/login')
+        return null
+    }
     return (
         <div className='bg-gradient-to-br from-blue-50 to-orange-50 h-screen'>
             <header className="bg-white z-50 shadow-sm border-b border-b-gray-100">
@@ -23,17 +50,23 @@ const page = () => {
                             </div>
                             <div>
                                 <h1 className="text-xl font-bold text-gray-900">Dashboard Administrativo</h1>
-                                <p className="text-xs text-gray-600">Fundación Elojim Jadach</p>
+                                <p className="text-xs text-gray-600">
+                                    Bienvenido, {session?.user?.name || 'Usuario'} | Fundación Elojim Jadach
+                                </p>
                             </div>
                         </div>
                         <div className="flex gap-2 ">
-                        <Link href="/" variant="outline" className="bg-transparent px-4 py-2 rounded-lg hover:bg-gray-100 items-center flex gap-2">
+                        <Link href="/" className="bg-transparent px-4 py-2 rounded-lg hover:bg-gray-100 items-center flex gap-2 text-gray-700">
                             <FaArrowLeft />
                             Volver
                         </Link>
-                        <Link href="/" variant="outline" className="bg-gray-50 px-4 py-2 rounded-lg hover:bg-gray-100">
+                        <button 
+                            onClick={handleLogout}
+                            className="bg-red-50 text-red-600 px-4 py-2 rounded-lg hover:bg-red-100 flex items-center gap-2"
+                        >
+                            <FaSignOutAlt />
                             Cerrar sesión
-                        </Link>
+                        </button>
                         </div>
                     </div>
                 </div>
@@ -71,4 +104,4 @@ const page = () => {
     )
 }
 
-export default page
+export default DashboardPage
