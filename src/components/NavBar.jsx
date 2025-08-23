@@ -2,7 +2,7 @@ import React from 'react'
 
 const NavBar = () => {
     return (
-        <header className="bg-white shadow-sm border-b">
+        <header className="bg-white shadow-sm ">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <div className="flex items-center space-x-3">
@@ -33,10 +33,6 @@ const NavBar = () => {
                             Contáctanos
                         </a>
                     </nav>
-
-                    <button  className="hidden md:inline-flex bg-transparent">
-                        Iniciar sesión
-                    </button>
                 </div>
             </div>
         </header>
