@@ -17,13 +17,12 @@ export const metadata = {
   description: "Elojim",
 };
 
-export default function RootLayout({ children }) {
+export default function AuthLayout({ children }) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavBar/>
         {children}
       </body>
     </html>
