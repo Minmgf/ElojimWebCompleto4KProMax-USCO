@@ -104,7 +104,7 @@ export default function page() {
         program.title.toLowerCase().includes(query.toLowerCase())
     );
     return (
-        <div className="min-h-screen bg-gray-50 py-12 px-6">
+        <div className="min-h-screen bg-gray-50 py-12 px-6 pt-24">
             <div className="text-center mb-12">
                 <h1 className="text-lg md:text-5xl font-bold text-blue-800 mb-4">Nuestros programas sociales</h1>
                 <p className="text-md text-gray-600 max-w-3xl mx-auto mb-8">

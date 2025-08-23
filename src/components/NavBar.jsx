@@ -27,7 +27,7 @@ const NavBar = () => {
                         <Link href="/programas" className="text-gray-700 hover:text-blue-600 font-medium">
                             Programas
                         </Link>
-                        <a href="/#noticias" className="text-gray-700 hover:text-blue-600 font-medium">
+                        <a href="/noticias" className="text-gray-700 hover:text-blue-600 font-medium">
                             Noticias
                         </a>
                         <a href="/#contacto" className="text-gray-700 hover:text-blue-600 font-medium">
