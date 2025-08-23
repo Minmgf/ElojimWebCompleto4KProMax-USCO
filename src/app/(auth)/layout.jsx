@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
+import Providers from "@/components/Providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,17 +13,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Elojim",
-  description: "Elojim",
+  title: "Elojim - Dashboard",
+  description: "Panel administrativo de la Fundación Elojim",
 };
 
 export default function AuthLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

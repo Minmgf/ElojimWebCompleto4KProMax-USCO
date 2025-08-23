@@ -9,8 +9,59 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
   session: {
     strategy: "jwt",
-    maxAge: 2 * 60 * 60,
-    updateAge: 30 * 60,
+    maxAge: 2 * 60 * 60, // 2 horas
+    updateAge: 30 * 60,  // 30 minutos
+  },
+  pages: {
+    signIn: "/login",
+    error: "/login",
+  },
+  cookies: {
+    sessionToken: {
+      name: `${process.env.NODE_ENV === "production" ? "__Secure-" : ""}next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+    callbackUrl: {
+      name: `${process.env.NODE_ENV === "production" ? "__Secure-" : ""}next-auth.callback-url`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+    csrfToken: {
+      name: `${process.env.NODE_ENV === "production" ? "__Host-" : ""}next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id as string;
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
+      }
+      return session;
+    },
   },
   providers: [
     Credentials({
@@ -34,7 +85,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           );
 
           // Buscar el usuario en la base de datos
-          const userFound = await db.users.findUnique({
+          const userFound = await db.user.findUnique({
             where: {
               email: email,
             },
@@ -51,10 +102,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             throw new Error("Credenciales incorrectas");
           }
 
-          console.log(
-            `Inicio de sesión exitoso para el usuario: ${userFound.name}`
-          );
-
           return {
             id: userFound.id,
             name: userFound.name,
@@ -62,10 +109,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           };
         } catch (error) {
           if (error instanceof ZodError) {
-            // Si falla validación, retorna null
             return null;
           }
-          // Otras excepciones de autorización
           return null;
         }
       },
