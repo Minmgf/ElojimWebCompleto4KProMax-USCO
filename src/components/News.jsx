@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { FaArrowRight } from 'react-icons/fa6'
 
@@ -47,6 +48,10 @@ const News = () => {
                     ))}
                 </div>
             </div>
+                <Link href={'/noticias'}  className="flex max-w-sm justify-center  mx-auto my-4 py-2 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white">
+                    Ver mas noticias
+                    <FaArrowRight className="ml-2 h-5 w-5" />
+                </Link>
         </section>
     )
 }
