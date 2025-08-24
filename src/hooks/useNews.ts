@@ -75,7 +75,9 @@ export function useNews(filters: NewsFilters = {}) {
         }
       });
 
-      const response = await fetch(`/api/news?${params.toString()}`);
+      const response = await fetch(`/api/news?${params.toString()}`, {
+        credentials: 'include' // Para incluir cookies de sesión
+      });
       const data: NewsResponse = await response.json();
 
       if (!data.success) {
@@ -139,6 +141,7 @@ export function useCreateNews() {
       const response = await fetch('/api/news', {
         method: 'POST',
         body: formData,
+        credentials: 'include' // Para autenticación
       });
 
       const result = await response.json();
@@ -205,6 +208,7 @@ export function useUpdateNews() {
       const response = await fetch(`/api/news/${id}`, {
         method: 'PUT',
         body: formData,
+        credentials: 'include' // Para autenticación
       });
 
       const result = await response.json();
@@ -231,6 +235,50 @@ export function useUpdateNews() {
 }
 
 /**
+ * Hook para obtener una noticia específica por ID
+ */
+export function useNewsById(id: string) {
+  const [news, setNews] = useState<NewsItem | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchNewsById = async () => {
+    if (!id) return;
+    
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`/api/news/${id}`, {
+        credentials: 'include'
+      });
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || 'Error obteniendo noticia');
+      }
+
+      setNews(data.data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error desconocido');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchNewsById();
+  }, [id]);
+
+  return {
+    news,
+    loading,
+    error,
+    refetch: fetchNewsById,
+  };
+}
+
+/**
  * Hook para eliminar noticias
  */
 export function useDeleteNews() {
@@ -244,6 +292,7 @@ export function useDeleteNews() {
     try {
       const response = await fetch(`/api/news/${id}`, {
         method: 'DELETE',
+        credentials: 'include' // Para autenticación
       });
 
       const result = await response.json();
