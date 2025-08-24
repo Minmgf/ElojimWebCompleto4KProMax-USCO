@@ -268,7 +268,7 @@ export function useNewsById(id: string) {
 
   useEffect(() => {
     fetchNewsById();
-  }, [id]);
+  }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {
     news,
