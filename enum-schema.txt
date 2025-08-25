@@ -1,0 +1,57 @@
+enum TipoVinculacion {
+  INSTITUCION_EDUCATIVA
+  COMUNIDAD
+}
+
+enum NivelEducativo {
+  Primaria
+  Secundaria
+  Tecnica_Tecnologica
+  Universitaria
+  Especializacion
+  Maestria
+  Doctorado
+  Ninguno
+}
+
+enum SupportArea {
+  CAPACITACION_Y_EMPLEO
+  EMPRENDIMIENTO
+  EDUCACION
+  SALUD_Y_BIENESTAR
+  APOYO_PSICOLOGICO_Y_SOCIAL
+  VIVIENDA_Y_SUBSIDIOS
+  OTRAS
+}
+
+enum TipoDisponibilidad {
+  TIEMPO_COMPLETO
+  TIEMPO_PARCIAL
+  FINES_DE_SEMANA
+  DIAS_ESPECIFICOS
+}
+
+
+
+enum AreaInteresCultural {
+  Musica
+  Danza
+  Manualidades
+  Maquillaje
+  Dibujo
+  Otro
+}
+
+
+
+enum ProgramaId {
+  MUJER_VULNERABLE      @map("mujer-vulnerable")
+  SEMILLERO_INNOVACION  @map("semillero-innovacion")
+  SEGURIDAD_ALIMENTARIA @map("seguridad-alimentaria")
+  VOLUNTARIADO          @map("voluntariado")
+  ECONOMIA_PLATEADA     @map("economia-plateada")
+  CULTURAL              @map("cultural")
+  TALLER_STEAM          @map("taller-steam")
+  REFUERZO_ESCOLAR      @map("refuerzo-escolar")
+  SOFTWARE_FACTORY      @map("software-factory")
+}
