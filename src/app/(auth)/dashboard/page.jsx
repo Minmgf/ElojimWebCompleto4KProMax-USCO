@@ -6,6 +6,8 @@ import { FaArrowLeft, FaListUl, FaNewspaper, FaSignOutAlt } from 'react-icons/fa
 import Select from 'react-select'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import NewsModal from '@/components/dashboard/NewsModal'
+import NewsData from '@/components/dashboard/NewsData'
 
 const programs = [
     { value: 'Opcion 1', label: 'Opcion 1' },
@@ -84,15 +86,24 @@ const DashboardPage = () => {
                     </TabsList>
 
                     <TabsContent value="noticias" className="space-y-4">
-                        <div className="bg-white rounded-lg shadow p-6">
-                            <h2 className="text-2xl font-bold mb-4">Gestión de Noticias</h2>
+                        <div className="">
+                            <div className="flex justify-between items-center mb-4">
+                                <h2 className="text-2xl mt-6 uppercase font-bold">Gestión de Noticias</h2>
+                                <NewsModal onSuccess={() => {
+                                    console.log('Noticia creada exitosamente');
+                                }} />
+                            </div>
+
+                            <div className="mt-6">
+                                <NewsData/>
+                            </div>
                         </div>
                     </TabsContent>
 
                     <TabsContent value="programas" className="space-y-4">
-                        <div className="bg-white rounded-lg shadow p-6">
-                            <h2 className="text-2xl font-bold mb-4">Gestión de Programas</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="">
+                            <h2 className="text-2xl mt-6 uppercase font-bold">Gestión de Programas</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
                                 <Select options={programs} />
 
                             </div>

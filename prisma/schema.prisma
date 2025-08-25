@@ -59,21 +59,34 @@ model users {
   name      String
   password  String
   createdAt DateTime @default(now())
-  updatedAt DateTime
-
-  news      news[]
+  updatedAt DateTime @updatedAt
+  
+  // Relación con noticias
+  news      News[]
 
   @@map("users")
 }
 
-model news {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String?
-  images    String
-  authorId  Int
-  author    users    @relation(fields: [authorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+model News {
+  id        String   @id @default(cuid())
+  title     String   @db.VarChar(255)
+  content   String
+  category  String[]
+  important Boolean  @default(false)
+  images    String[]
+  isActive  Boolean  @default(true)
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relaciones
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
+  // Índices
+  @@index([isActive])
+  @@index([important])
+  @@index([createdAt])
+  @@index([category])
   @@map("news")
 }
 
