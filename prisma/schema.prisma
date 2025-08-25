@@ -7,54 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//
-// ENUMS
-//
-enum socialStratum {
-  E1
-  E2
-  E3
-  E4
-  E5
-  E6
-  @@map("socialStratum")
-}
-
-enum etnicalGroup {
-  Ninguno
-  Afrodescendiente
-  Indigena
-  Raizal
-  Rom_Gitano
-  Palenquero
-  Otro
-  @@map("etnicalGroup")
-}
-
-enum typeDocument {
-  CC
-  TI
-  CE
-  Pasaporte
-  @@map("typeDocument")
-}
-
-enum Gender {
-  FEMENINO
-  MASCULINO
-  OTRO
-}
-
-enum EventStatus {
-  Planeado
-  Finalizado
-}
 
 //
 // MODELS
 //
-model users {
-  id        Int      @id @default(autoincrement())
+model User {
+  id        String      @id @default(cuid())
   email     String   @unique
   name      String
   password  String
@@ -161,4 +119,46 @@ model inscripciones_por_evento {
 
   @@unique([numDocument, eventId])
   @@map("inscripciones_por_evento")
+}
+//
+// ENUMS
+//
+enum socialStratum {
+  E1
+  E2
+  E3
+  E4
+  E5
+  E6
+  @@map("socialStratum")
+}
+
+enum etnicalGroup {
+  Ninguno
+  Afrodescendiente
+  Indigena
+  Raizal
+  Rom_Gitano
+  Palenquero
+  Otro
+  @@map("etnicalGroup")
+}
+
+enum typeDocument {
+  CC
+  TI
+  CE
+  Pasaporte
+  @@map("typeDocument")
+}
+
+enum Gender {
+  FEMENINO
+  MASCULINO
+  OTRO
+}
+
+enum EventStatus {
+  Planeado
+  Finalizado
 }
