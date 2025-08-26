@@ -7,8 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+//
+// MODELS
+//
 model User {
-  id        String   @id @default(cuid())
+  id        String      @id @default(cuid())
   email     String   @unique
   name      String
   password  String
@@ -42,4 +46,119 @@ model News {
   @@index([createdAt])
   @@index([category])
   @@map("news")
+}
+
+model Programas {
+  id                  Int                @id @default(autoincrement())
+  name                String
+  description         String
+  longDescription     String
+  requirements        String[]
+  benefits            String[]
+  specificInformation Json
+  registros           RegistroPrograma[]
+  eventos             events[]          @relation("EventProgramas")
+
+  @@map("Programas")
+}
+
+model RegistroPrograma {
+  id                  Int                @id @default(autoincrement())
+  typeDocument        typeDocument
+  gender              Gender
+  numDocument         String
+  fullName            String
+  birthDate           DateTime
+  comune              String
+  socialStratum       socialStratum
+  age                 Int
+  etnicalGroup        etnicalGroup
+  address             String
+  phone               String
+  email               String
+  motivation          String
+  expectations        String
+  acceptTerms         Boolean
+  specificInformation Json
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  programaId          Int
+  programa            Programas          @relation(fields: [programaId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@unique([programaId, numDocument])
+  @@map("RegistroPrograma")
+}
+
+model events {
+  id          Int              @id @default(autoincrement())
+  name        String
+  description String
+  date        DateTime
+  location    String
+  duration    Int
+  capacity    Int
+  registered  Int              @default(0)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime
+  status      EventStatus
+  inscripciones inscripciones_por_evento[]
+  programas     Programas[]    @relation("EventProgramas")
+
+  @@map("events")
+}
+
+model inscripciones_por_evento {
+  id         Int      @id @default(autoincrement())
+  fullName   String
+  numDocument String
+  email String 
+  phone String 
+  eventId    Int
+  createdAt  DateTime @default(now())
+  event      events   @relation(fields: [eventId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@unique([numDocument, eventId])
+  @@map("inscripciones_por_evento")
+}
+//
+// ENUMS
+//
+enum socialStratum {
+  E1
+  E2
+  E3
+  E4
+  E5
+  E6
+  @@map("socialStratum")
+}
+
+enum etnicalGroup {
+  Ninguno
+  Afrodescendiente
+  Indigena
+  Raizal
+  Rom_Gitano
+  Palenquero
+  Otro
+  @@map("etnicalGroup")
+}
+
+enum typeDocument {
+  CC
+  TI
+  CE
+  Pasaporte
+  @@map("typeDocument")
+}
+
+enum Gender {
+  FEMENINO
+  MASCULINO
+  OTRO
+}
+
+enum EventStatus {
+  Planeado
+  Finalizado
 }
