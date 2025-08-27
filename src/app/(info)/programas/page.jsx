@@ -1,143 +1,209 @@
 "use client";
+import { useState } from "react";
 
-import React, { useState } from 'react'
-import { Search, Heart, Lightbulb, Wrench, Leaf, GraduationCap, Code, Users, Music, DollarSign } from "lucide-react"
-import { ProgramsCard } from '@/components/programs/ProgramsCard'
+export default function ProgramFormModal({ program, onClose }) {
+  const [formData, setFormData] = useState({});
+  const [acceptTerms, setAcceptTerms] = useState(false);
 
-const programs = [
-    {
-        id: 1,
-        title: "Programa Mujer Vulnerable",
-        description:
-            "Apoyo integral a mujeres en situación de vulnerabilidad a través de asistencia psicológica, legal y formación para el empleo.",
-        icon: Heart,
-        color: "bg-pink-100 border-pink-200 hover:bg-pink-50",
-        iconColor: "text-pink-600",
-        titleColor: "text-pink-700",
-    },
-    {
-        id: 2,
-        title: "Semillero de Innovación y Emprendimiento",
-        description:
-            "Formación y acompañamiento para el desarrollo de proyectos innovadores con impacto social y económico.",
-        icon: Lightbulb,
-        color: "bg-green-100 border-green-200 hover:bg-green-50",
-        iconColor: "text-green-600",
-        titleColor: "text-green-700",
-    },
-    {
-        id: 3,
-        title: "Programa Taller STEAM+H",
-        description:
-            "Formación en ciencia, tecnología, ingeniería, arte, matemáticas y humanidades para niños, niñas y adolescentes.",
-        icon: Wrench,
-        color: "bg-orange-100 border-orange-200 hover:bg-orange-50",
-        iconColor: "text-orange-600",
-        titleColor: "text-orange-700",
-    },
-    {
-        id: 4,
-        title: "Programa de Seguridad Alimentaria",
-        description:
-            "Implementación de sistemas agrícolas sostenibles para mejorar la producción, distribución y acceso a alimentos nutritivos.",
-        icon: Leaf,
-        color: "bg-teal-100 border-teal-200 hover:bg-teal-50",
-        iconColor: "text-teal-600",
-        titleColor: "text-teal-700",
-    },
-    {
-        id: 5,
-        title: "Programa de Jornadas de Refuerzo Escolar",
-        description:
-            "Apoyo académico para niños, niñas y adolescentes con dificultades en su proceso de aprendizaje escolar.",
-        icon: GraduationCap,
-        color: "bg-yellow-100 border-yellow-200 hover:bg-yellow-50",
-        iconColor: "text-yellow-600",
-        titleColor: "text-yellow-700",
-    },
-    {
-        id: 6,
-        title: "Programa de Factoría de Software",
-        description:
-            "Formación en desarrollo de software y creación de soluciones tecnológicas para problemas comunitarios.",
-        icon: Code,
-        color: "bg-blue-100 border-blue-200 hover:bg-blue-50",
-        iconColor: "text-blue-600",
-        titleColor: "text-blue-700",
-    },
-    {
-        id: 7,
-        title: "Programa de Voluntariado Social",
-        description:
-            "Oportunidades para contribuir con tiempo y talento en proyectos sociales de alto impacto comunitario.",
-        icon: Users,
-        color: "bg-red-100 border-red-200 hover:bg-red-50",
-        iconColor: "text-red-600",
-        titleColor: "text-red-700",
-    },
-    {
-        id: 8,
-        title: "Programa Cultural",
-        description:
-            "Formación en música, danza, manualidades y otras expresiones artísticas para el desarrollo integral de la comunidad.",
-        icon: Music,
-        color: "bg-purple-100 border-purple-200 hover:bg-purple-50",
-        iconColor: "text-purple-600",
-        titleColor: "text-purple-700",
-    },
-    {
-        id: 9,
-        title: "Programa Economía Plateada",
-        description: "Apoyo integral para adultos mayores en el desarrollo de proyectos sociales y bienestar comunitario.",
-        icon: DollarSign,
-        color: "bg-gray-100 border-gray-200 hover:bg-gray-50",
-        iconColor: "text-gray-600",
-        titleColor: "text-gray-700",
-    },
-]
+  const handleChange = (campo, valor) => {
+    setFormData((prev) => ({ ...prev, [campo]: valor }));
+  };
 
-export default function page() {
-
-    const [query, setQuery] = useState("");
-
-    const filteredPrograms = programs.filter((program) =>
-        program.title.toLowerCase().includes(query.toLowerCase())
-    );
-    return (
-        <div className="min-h-screen bg-gray-50 py-12 px-6 pt-24">
-            <div className="text-center mb-12">
-                <h1 className="text-lg md:text-5xl font-bold text-blue-800 mb-4">Nuestros programas sociales</h1>
-                <p className="text-md text-gray-600 max-w-3xl mx-auto mb-8">
-                    Explora nuestros programas sociales y únete a las iniciativas que están transformando vidas en nuestra
-                    comunidad.
-                </p>
-
-                <div className="flex items-center max-w-md mx-auto px-4 py-1 bg-white rounded-xl border shadow-sm border-gray-200 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-200 transition-all duration-300">
-                    <div className="flex items-center justify-center w-10 h-10">
-                        <Search className="text-gray-500 h-5 w-5" />
-                    </div>
-                    <input
-                        type="text"
-                        placeholder="Buscar programas..."
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        className="ml-3 flex-1 bg-transparent border-none outline-none text-base text-gray-700 placeholder-gray-400 focus:ring-0"
-                    />
-                </div>
-
+  const renderField = (campo) => {
+    switch (campo.tipo) {
+      case "text":
+      case "number":
+      case "email":
+      case "date":
+        return (
+          <div key={campo.nombre} className="flex flex-col mb-4">
+            <label className="font-semibold">{campo.etiqueta}</label>
+            <input
+              type={campo.tipo}
+              value={formData[campo.nombre] || ""}
+              onChange={(e) => handleChange(campo.nombre, e.target.value)}
+              className="border rounded px-3 py-2"
+              required={campo.requerido || false}
+            />
+          </div>
+        );
+      case "radio":
+        return (
+          <div key={campo.nombre} className="flex flex-col mb-4">
+            <label className="font-semibold">{campo.etiqueta}</label>
+            <div className="flex gap-4 mt-2">
+              {campo.opciones.map((op) => (
+                <label key={op} className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name={campo.nombre}
+                    value={op}
+                    checked={formData[campo.nombre] === op}
+                    onChange={() => handleChange(campo.nombre, op)}
+                  />
+                  {op}
+                </label>
+              ))}
             </div>
+          </div>
+        );
+      case "select":
+        return (
+          <div key={campo.nombre} className="flex flex-col mb-4">
+            <label className="font-semibold">{campo.etiqueta}</label>
+            <select
+              value={formData[campo.nombre] || ""}
+              onChange={(e) => handleChange(campo.nombre, e.target.value)}
+              className="border rounded px-3 py-2"
+            >
+              <option value="">Seleccione...</option>
+              {campo.opciones.map((op, idx) => (
+                <option key={idx} value={op}>{op}</option>
+              ))}
+            </select>
+          </div>
+        );
+      case "textarea":
+        return (
+          <div key={campo.nombre} className="flex flex-col mb-4">
+            <label className="font-semibold">{campo.etiqueta}</label>
+            <textarea
+              value={formData[campo.nombre] || ""}
+              onChange={(e) => handleChange(campo.nombre, e.target.value)}
+              className="border rounded px-3 py-2"
+            />
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                {filteredPrograms.length > 0 ? (
-                    filteredPrograms.map((program) => (
-                        <ProgramsCard key={program.id} {...program} />
-                    ))
-                ) : (
-                    <p className="col-span-full text-center text-gray-500 text-lg">
-                        No se encontraron programas
-                    </p>
-                )}
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!acceptTerms) {
+      alert("Debes aceptar los términos y condiciones");
+      return;
+    }
+
+    const payload = {
+      programId: program.id,
+      ...formData
+    };
+
+    console.log("Datos a enviar:", payload);
+
+    const res = await fetch("/api/programas/registro-programas", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      alert("Inscripción enviada con éxito");
+      onClose();
+    } else {
+      alert("Error al enviar la inscripción");
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50 overflow-auto">
+      <div className="bg-white rounded-xl p-6 w-full max-w-3xl shadow-lg relative">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+        >
+          ✕
+        </button>
+        {program ? (
+        <h2 className="text-2xl font-bold text-blue-800 mb-6">
+            Inscripción: {program.name}
+        </h2>
+        ) : (
+        <h2 className="text-2xl font-bold text-gray-500 mb-6">Cargando...</h2>
+        )}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* ✅ Bloque fijo: Datos personales */}
+          <div className="bg-gray-50 p-4 rounded-lg border">
+            <h3 className="text-lg font-bold mb-4">Datos Personales</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="font-semibold">Nombre completo</label>
+                <input
+                  type="text"
+                  value={formData.fullName || ""}
+                  onChange={(e) => handleChange("fullName", e.target.value)}
+                  className="border rounded px-3 py-2 w-full"
+                  required
+                />
+              </div>
+              <div>
+                <label className="font-semibold">Número de documento</label>
+                <input
+                  type="text"
+                  value={formData.numDocument || ""}
+                  onChange={(e) => handleChange("numDocument", e.target.value)}
+                  className="border rounded px-3 py-2 w-full"
+                  required
+                />
+              </div>
+              <div>
+                <label className="font-semibold">Teléfono</label>
+                <input
+                  type="text"
+                  value={formData.phone || ""}
+                  onChange={(e) => handleChange("phone", e.target.value)}
+                  className="border rounded px-3 py-2 w-full"
+                />
+              </div>
+              <div>
+                <label className="font-semibold">Correo electrónico</label>
+                <input
+                  type="email"
+                  value={formData.email || ""}
+                  onChange={(e) => handleChange("email", e.target.value)}
+                  className="border rounded px-3 py-2 w-full"
+                />
+              </div>
             </div>
-        </div>
-    )
+          </div>
+
+          {/* ✅ Bloques dinámicos */}
+          {program?.specificInformation?.secciones?.map((sec, i) => (
+            <div key={i} className="bg-gray-50 p-4 rounded-lg border">
+                <h3 className="text-lg font-bold mb-4">{sec.titulo}</h3>
+                {sec.campos.map((campo) => renderField(campo))}
+            </div>
+            ))}
+
+
+          {/* ✅ Checkbox términos */}
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={acceptTerms}
+              onChange={(e) => setAcceptTerms(e.target.checked)}
+              required
+            />
+            <span>
+              Acepto los{" "}
+              <a href="/terminos" className="text-blue-600 underline" target="_blank">
+                Términos y Condiciones
+              </a>
+            </span>
+          </div>
+
+          {/* ✅ Botón */}
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition"
+          >
+            Enviar inscripción
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
