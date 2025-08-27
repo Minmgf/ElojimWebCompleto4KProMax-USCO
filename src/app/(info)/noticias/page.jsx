@@ -15,11 +15,27 @@ const Page = () => {
         totalPages: 1,
     });
 
-    const fetchLatestNews = async () => {
+    const fetchLatestNews = async (page = 1) => {
         setLoading(true)
+        setError(false)
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_URL_BACKEND}/news`);
+            const response = await fetch(`/api/news?page=${page}&limit=${pagination.limit}&isActive=true`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
             const result = await response.json();
+
+            if (!result.success) {
+                throw new Error(result.error || 'Error al obtener las noticias');
+            }
 
             const { data } = result;
             const formattedNews = data.news.map((news) => ({
@@ -48,6 +64,7 @@ const Page = () => {
 
     const handlePageChange = (page) => {
         setPagination((prev) => ({ ...prev, page }));
+        fetchLatestNews(page);
     };
 
     return (
