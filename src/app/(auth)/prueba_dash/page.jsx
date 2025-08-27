@@ -47,10 +47,7 @@ const DashboardPage = () => {
     )
   }
 
-  if (status === "unauthenticated") {
-    router.push('/login')
-    return null
-  }
+  
 
   const handleChange = (campo, valor) => {
     setFormData((prev) => ({ ...prev, [campo]: valor }))
