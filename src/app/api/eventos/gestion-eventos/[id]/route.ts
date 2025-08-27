@@ -1,11 +1,18 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/libs/db";
 
+interface RouteParams {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
 // Obtener un evento por ID
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: RouteParams) {
   try {
+    const { id } = await params;
     const events = await prisma.events.findUnique({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt(id) },
       include: {
         programas: true,
         inscripciones: true
@@ -22,8 +29,9 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params }: RouteParams) {
   try {
+    const { id } = await params;
     const body = await req.json();
     const { name, description, date, location, duration, status, capacity } = body;
 
@@ -61,7 +69,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     }
 
     const eventsActualizado = await prisma.events.update({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt(id) },
       data
     });
 
@@ -73,10 +81,12 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 
 
 // Eliminar un evento
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: RouteParams) {
   try {
+    const { id } = await params;
+    
     await prisma.events.delete({
-      where: { id: parseInt(params.id) }
+      where: { id: parseInt(id) }
     });
 
     return NextResponse.json({ message: "Evento eliminado correctamente" });
