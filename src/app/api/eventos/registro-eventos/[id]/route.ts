@@ -1,13 +1,19 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/libs/db";
 
+interface RouteParams {
+  params: Promise<{
+    id: string;
+  }>;
+}
 
 export async function GET(
-  _req: Request,
-  { params }: { params: { id: string } }
+  _req: NextRequest,
+  { params }: RouteParams
 ) {
   try {
-    const inscripcionId = Number(params.id);
+    const { id } = await params;
+    const inscripcionId = Number(id);
     if (!Number.isInteger(inscripcionId)) {
       return NextResponse.json(
         { error: "El parámetro id debe ser numérico" },

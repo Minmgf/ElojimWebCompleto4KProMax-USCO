@@ -18,7 +18,7 @@ const NewsDetail = () => {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_URL_BACKEND}/news/${id}`)
+                const response = await fetch(`/api/news/${id}`)
                 const { data } = await response.json()
                 setNewsData(data)
             } catch (err) {
