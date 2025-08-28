@@ -4,16 +4,50 @@ import  prisma  from "@/libs/db";
 // GET /api/programas/inscripcion-programas/[id]
 export async function GET(_req, { params }) {
   try {
-    const registro = await prisma.registroPrograma.findUnique({
-      where: { id: Number(params.id) },
-      include: { programa: true },
+    const programaId = Number(params.id);
+
+    const programa = await prisma.programas.findUnique({
+      where: { id: programaId },
+      select: {
+        id: true,
+        name: true,
+        registros: {       // usa el nombre real de la relación en tu schema
+          select: {
+            id: true,
+            fullName: true,
+            numDocument: true,
+            typeDocument: true,
+            gender: true,
+            birthDate: true,
+            email: true,
+            phone: true,
+            age: true,
+            comune: true,
+            socialStratum: true,
+            etnicalGroup: true,
+            address: true,
+            motivation: true,
+            expectations: true,
+            specificInformation: true,
+            createdAt: true,
+          },
+        },
+      },
     });
-    if (!registro) return NextResponse.json({ error: "No se encontro el registro" }, { status: 404 });
-    return NextResponse.json(registro, { status: 200 });
+
+    if (!programa) {
+      return NextResponse.json({ error: "Programa no encontrado" }, { status: 404 });
+    }
+
+    return NextResponse.json(programa, { status: 200 });
   } catch (err) {
-    return NextResponse.json({ error: "Error al cargar los datos", details: err.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Error al cargar los datos", details: err.message },
+      { status: 500 }
+    );
   }
 }
+
 
 // PUT /api/programas/inscripcion-programas/:id
 export async function PUT(req, { params }) {
