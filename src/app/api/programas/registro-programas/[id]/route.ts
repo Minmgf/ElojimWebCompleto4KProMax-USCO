@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import  prisma  from "@/libs/db";
 
-// GET /api/programas/inscripcion-programas/[id]
+// GET /api/programas/registro-programas/[id]
 export async function GET(_req, { params }) {
   try {
+    const { id } = await params;
     const registro = await prisma.registroPrograma.findUnique({
-      where: { id: Number(params.id) },
+      where: { id: Number(id) },
       include: { programa: true },
     });
     if (!registro) return NextResponse.json({ error: "No se encontro el registro" }, { status: 404 });
@@ -15,13 +16,14 @@ export async function GET(_req, { params }) {
   }
 }
 
-// PUT /api/programas/inscripcion-programas/:id
+// PUT /api/programas/registro-programas/:id
 export async function PUT(req, { params }) {
   try {
+    const { id } = await params;
     const body = await req.json();
 
     const updated = await prisma.registroPrograma.update({
-      where: { id: Number(params.id) },
+      where: { id: Number(id) },
       data: {
         ...(body.typeDocument !== undefined && { typeDocument: body.typeDocument }),
         ...(body.gender !== undefined && { gender: body.gender }),
@@ -55,10 +57,11 @@ export async function PUT(req, { params }) {
   }
 }
 
-// DELETE /api/programas/inscripcion-programas/:id
+// DELETE /api/programas/registro-programas/:id
 export async function DELETE(_req, { params }) {
   try {
-    await prisma.registroPrograma.delete({ where: { id: Number(params.id) } });
+    const { id } = await params;
+    await prisma.registroPrograma.delete({ where: { id: Number(id) } });
     return NextResponse.json({ message: "Registro eliminado" }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ error: "Error al intenar eliminar le registro", details: err.message }, { status: 500 });

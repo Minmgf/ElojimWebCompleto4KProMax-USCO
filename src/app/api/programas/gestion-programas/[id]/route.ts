@@ -4,8 +4,9 @@ import  prisma  from "@/libs/db";
 // Obtener un programa por id
 export async function GET(req, { params }) {
   try {
+    const { id } = await params;
     const programa = await prisma.programas.findUnique({
-      where: { id: parseInt(params.id) }
+      where: { id: parseInt(id) }
     });
 
     if (!programa) {
@@ -21,11 +22,12 @@ export async function GET(req, { params }) {
 // Editar un programa
 export async function PUT(req, { params }) {
   try {
+    const { id } = await params;
     const body = await req.json();
     const { name, description, longDescription, requirements, benefits, specificInformation } = body;
 
     const programaActualizado = await prisma.programas.update({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt(id) },
       data: {
         name,
         description,
@@ -45,8 +47,9 @@ export async function PUT(req, { params }) {
 // Eliminar un programa
 export async function DELETE(req, { params }) {
   try {
+    const { id } = await params;
     const programa = await prisma.programas.findUnique({
-      where: { id: parseInt(params.id) }
+      where: { id: parseInt(id) }
     });
 
     if (!programa) {
@@ -54,7 +57,7 @@ export async function DELETE(req, { params }) {
     }
 
     await prisma.programas.delete({
-      where: { id: parseInt(params.id) }
+      where: { id: parseInt(id) }
     });
 
     return NextResponse.json({ message: "Programa eliminado correctamente" });

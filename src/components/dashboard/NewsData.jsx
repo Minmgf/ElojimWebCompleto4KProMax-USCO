@@ -11,7 +11,7 @@ import { useNews, useDeleteNews } from '@/hooks/useNews'
 import { toast } from 'sonner'
 import * as Dialog from "@radix-ui/react-dialog"
 import { Cross2Icon } from "@radix-ui/react-icons"
-import { FaEdit, FaTrash, FaEye, FaArrowLeft , FaArrowRight  } from 'react-icons/fa'
+import { FaEdit, FaTrash, FaEye, FaArrowLeft , FaArrowRight, FaSearch } from 'react-icons/fa'
 import NewsModal from './NewsModal'
 
 const DeleteConfirmDialog = ({ isOpen, onClose, onConfirm, loading, newsTitle }) => (
@@ -67,10 +67,12 @@ const NewsData = () => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
     const [editModalOpen, setEditModalOpen] = useState(false)
     const [selectedNews, setSelectedNews] = useState(null)
+    const [searchTerm, setSearchTerm] = useState('')
 
     const { news, pagination, loading, error, refetch } = useNews({
         page: currentPage,
-        limit: 10
+        limit: 10,
+        search: searchTerm
     })
 
     const { deleteNews, loading: deleteLoading } = useDeleteNews()
@@ -220,6 +222,18 @@ const NewsData = () => {
         toast.success('Noticia actualizada exitosamente')
     }
 
+    const handleSearch = (e) => {
+        e.preventDefault()
+        setCurrentPage(1) // Resetear a la primera página
+        refetch() // Refrescar con la nueva búsqueda
+    }
+
+    const handleClearSearch = () => {
+        setSearchTerm('')
+        setCurrentPage(1)
+        refetch()
+    }
+
     if (loading) {
         return (
             <div className="flex items-center justify-center py-8">
@@ -239,6 +253,49 @@ const NewsData = () => {
 
     return (
         <div className="bg-white rounded-lg shadow">
+            {/* Header con buscador */}
+            <div className="px-6 py-4 border-b border-gray-200">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                        <h3 className="text-lg font-semibold text-gray-900">
+                            Lista de Noticias
+                        </h3>
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                            {pagination?.totalCount || 0} noticias
+                        </span>
+                    </div>
+                    
+                    {/* Buscador */}
+                    <form onSubmit={handleSearch} className="flex gap-2">
+                        <div className="relative">
+                            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                            <input
+                                type="text"
+                                placeholder="Buscar por título..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-64"
+                            />
+                        </div>
+                        <button
+                            type="submit"
+                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                        >
+                            Buscar
+                        </button>
+                        {searchTerm && (
+                            <button
+                                type="button"
+                                onClick={handleClearSearch}
+                                className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                            >
+                                Limpiar
+                            </button>
+                        )}
+                    </form>
+                </div>
+            </div>
+
             {/* Tabla */}
             <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
@@ -293,7 +350,7 @@ const NewsData = () => {
                             disabled={!pagination.hasPrev}
                             className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            
+                            Anterior
                         </button>
                         <button
                             onClick={() => setCurrentPage(prev => prev + 1)}

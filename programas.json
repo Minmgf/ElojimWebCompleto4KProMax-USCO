@@ -1,0 +1,1563 @@
+[
+    {
+        "id": 1,
+        "name": "Programa Mujer vulnerable",
+        "description": "Apoyo integral a mujeres en situación de vulnerabilidad a través de asistencia psicológica, legal y formación para el empleo.",
+        "longDescription": "El Programa Mujer Vulnerable busca promover la autonomía económica y el bienestar integral de las mujeres en situación de vulnerabilidad, a través de la capacitación productiva, el acceso a microcréditos y el acompañamiento psicosocial. El programa fomenta la creación de redes de apoyo comunitarias y alianzas estratégicas con el sector privado para generar oportunidades laborales y fortalecer el emprendimiento. Además, se gestionan espacios seguros donde las mujeres puedan desarrollar sus talentos y construir su independencia económica.",
+        "requirements": [
+            "Ser mujer mayor de 18 años",
+            "Encontrarse en situación de vulnerabilidad económica o social",
+            "Residir en la zona de influencia del programa",
+            "Compromiso de asistencia a las actividades programadas"
+        ],
+        "benefits": [
+            "Atención psicológica personalizada",
+            "Asesoría legal gratuita",
+            "Talleres de formación para el empleo",
+            "Redes de apoyo entre participantes",
+            "Posibilidad de microcréditos para emprendimientos"
+        ],
+        "specificInformation": {
+            "secciones": [
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "es-madre-cabeza-hogar",
+                            "etiqueta": "¿Es madre cabeza de hogar?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "select",
+                            "nombre": "numero-hijos-a-cargo",
+                            "etiqueta": "Número de hijos a cargo",
+                            "opciones": [
+                                "1",
+                                "2",
+                                "3",
+                                "4 o mas"
+                            ],
+                            "condiciones": [
+                                {
+                                    "campo": "es-madre-cabeza-hogar",
+                                    "valor": "Si"
+                                }
+                            ],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "convive-con-otras-personas",
+                            "etiqueta": "¿Convive con otras personas?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "con-quienes",
+                            "etiqueta": "¿Con quiénes?",
+                            "opciones": [],
+                            "condiciones": [
+                                {
+                                    "campo": "convive-con-otras-personas",
+                                    "valor": "Si"
+                                }
+                            ],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "nivel-educativo-alcanzado",
+                            "etiqueta": "Nivel educativo alcanzado",
+                            "opciones": [
+                                "No tuvo estudio",
+                                "Primaria",
+                                "Secundaria",
+                                "Técnico",
+                                "Técnologo",
+                                "Titulo Universitario",
+                                "Especialización",
+                                "Maestria",
+                                "Doctorado"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "cuenta-con-empleo-actualmente",
+                            "etiqueta": "¿Cuenta con empleo actualmente?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "en-que-actividad-laboral",
+                            "etiqueta": "¿En que actividad laboral?",
+                            "opciones": [],
+                            "condiciones": [
+                                {
+                                    "campo": "cuenta-con-empleo-actualmente",
+                                    "valor": "Si"
+                                }
+                            ],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "tiene-alguna-fuente-de-ingresos",
+                            "etiqueta": "¿Tiene alguna fuente de ingresos?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [
+                                {
+                                    "campo": "cuenta-con-empleo-actualmente",
+                                    "valor": "No"
+                                }
+                            ],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Situación socioeconomica"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "en-que-areas-le-gustaria-recibir-apoyo",
+                            "etiqueta": "¿En que areas le gustaria recibir apoyo? (Marcar las que apliquen)",
+                            "opciones": [
+                                "Capacitación y empleo",
+                                "Educacion",
+                                "Apoyo psicológico",
+                                "Emprendimiento",
+                                "Salud y bienestar",
+                                "Vivienda y subsidios",
+                                "Otras"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "cuenta-con-algun-tipo-de-apoyo-gubernamental-o-institucional",
+                            "etiqueta": "¿Cuenta con algun tipo de apoyo gubernamental o institucional?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "cual-apoyo-gubernamental",
+                            "etiqueta": "¿Cúal?",
+                            "opciones": [],
+                            "condiciones": [
+                                {
+                                    "campo": "cuenta-con-algun-tipo-de-apoyo-gubernamental-o-institucional",
+                                    "valor": "Si"
+                                }
+                            ],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Intereses y Necesidades"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "por-que-desea-participar-en-el-programa-mujer-vulnerable",
+                            "etiqueta": "¿Por qué desea participar en el Programa Mujer Vulnerable?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "cuanto-tiempo-podria-dedicar-al-programa-semanalmente",
+                            "etiqueta": "¿Cúanto tiempo podria dedicar al programa semanalmente?",
+                            "opciones": [
+                                "5 horas semanales",
+                                "6 horas semanales",
+                                "7 o mas horas semanales"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "que-espera-lograr-con-su-participacion-en-el-programa",
+                            "etiqueta": "¿Qué espera lograr con su participación en el programa?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Motivación y Disponibilidad"
+                }
+            ]
+        }
+    },
+    {
+        "id": 2,
+        "name": "Semillero de Innovación y Emprendimiento",
+        "description": "Formación y acompañamiento para el desarrollo de proyectos innovadores con impacto social y económico.",
+        "longDescription": "El Semillero de Innovación y Emprendimiento está dirigido a jóvenes de 15 años en adelante interesados en desarrollar habilidades creativas con pensamiento crítico, orientadas a generar soluciones innovadoras con impacto social y espíritu emprendedor.",
+        "requirements": [
+            "Personas mayores de 15 años",
+            "Interés en innovación y emprendimiento",
+            "Compromiso con el desarrollo de proyectos",
+            "Disponibilidad para participar en actividades formativas"
+        ],
+        "benefits": [
+            "Formación en metodologías de innovación",
+            "Mentoría especializada",
+            "Acceso a redes de colaboración",
+            "Espacios de trabajo colaborativo",
+            "Oportunidades de financiación para proyectos destacados"
+        ],
+        "specificInformation": {
+            "secciones": [
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "como-desea-vincularse-al-semillero",
+                            "etiqueta": "¿Cómo desea vincularse al semillero?",
+                            "opciones": [
+                                "A través de una institución educativa",
+                                "Como miembro de una comunidad"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "nombre-de-la-institucion-educativa-o-comunidad",
+                            "etiqueta": "Nombre de la institución educativa o comunidad",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "select",
+                            "nombre": "nivel-educativo-alcanzado",
+                            "etiqueta": "Nivel educativo alcanzado",
+                            "opciones": [
+                                " No tuvo estudio",
+                                "Primaria",
+                                "Secundaria",
+                                "Técnico",
+                                "Técnologo",
+                                "Titulo Universitario",
+                                "Especialización",
+                                "Maestria",
+                                "Doctorado"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Información de vinculación"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "has-participado-anteriormente-en-iniciativas-de-innovacion-o-emprendimiento",
+                            "etiqueta": "¿Has participado anteriormente en iniciativas de innovación o emprendimiento?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "checkbox",
+                            "nombre": "areas-de-interes",
+                            "etiqueta": "Áreas de interés (Marcar las que apliquen)",
+                            "opciones": [
+                                "Emprendimiento social",
+                                "Medio ambiente y sostenibilidad",
+                                "Desarrollo de productos o servicios",
+                                "Tecnología e innovación",
+                                "Transformación digital",
+                                "Otras"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false,
+                            "SeleccionMultiple": true
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "tiene-un-proyecto-en-marcha-o-una-idea-de-emprendimiento",
+                            "etiqueta": "¿Tiene un proyecto en marcha o una idea de emprendimiento?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "describa-brevemente-su-proyecto-o-idea",
+                            "etiqueta": "Describa brevemente su proyecto o idea",
+                            "opciones": [],
+                            "condiciones": [
+                                {
+                                    "campo": "tiene-un-proyecto-en-marcha-o-una-idea-de-emprendimiento",
+                                    "valor": "Si"
+                                }
+                            ],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Intereses y Experiencia"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "en-que-areas-considera-que-tiene-habilidades-relevantes-para-el-semillero",
+                            "etiqueta": "¿En que áreas considera que tiene habilidades relevantes para el semillero?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "disponibilidad-horaria-para-actividades-del-semillero",
+                            "etiqueta": "Disponibilidad horaria para actividades del semillero",
+                            "opciones": [
+                                "menos de 4 horas semanales",
+                                "5 horas semanales",
+                                "6 horas semanales",
+                                "7 o mas horas semanales"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Habilidades y Disponibilidad"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "por-que-desea-unirse-al-semillero-de-innovacion-y-emprendimiento",
+                            "etiqueta": "¿Por qué desea unirse al Semillero de Innovacion y Emprendimiento?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "que-espera-lograr-con-su-participacion-en-el-semillero",
+                            "etiqueta": "¿Qué espera lograr con su participacion en el semillero?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Motivación"
+                }
+            ]
+        }
+    },
+    {
+        "id": 3,
+        "name": "Programa Taller STEAM+H",
+        "description": "Formación en ciencia, tecnología, ingeniería, arte, matemáticas y humanidades para niños, niñas y adolescentes.",
+        "longDescription": "El programa STEAM+H está diseñado para que niños y jóvenes desarrollen habilidades en Ciencia, Tecnología, Ingeniería, Artes, Matemáticas y Humanidades, fomentando el pensamiento crítico, la creatividad y la resolución de problemas con ética y comunicación efectiva.",
+        "requirements": [
+            "Niños, niñas y adolescentes entre 8 y 14 años",
+            "Interés en actividades tecnológicas y creativas",
+            "Disponibilidad para asistir a los talleres semanales",
+            "Autorización de padres o acudientes"
+        ],
+        "benefits": [
+            "Desarrollo de pensamiento computacional",
+            "Aprendizaje de programación básica y robótica",
+            "Fomento de la creatividad y trabajo en equipo",
+            "Materiales y equipos incluidos",
+            "Presentación de proyectos finales a la comunidad"
+        ],
+        "specificInformation": {
+            "secciones": [
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "nombre-completo",
+                            "etiqueta": "Nombre completo",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "relacion-con-el-niño-niña",
+                            "etiqueta": "Relacion con el niño/niña",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "telefono-de-contacto-acudiente",
+                            "etiqueta": "Teléfono de contacto",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "correo-electronico-acudiente",
+                            "etiqueta": "Correo electrónico",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Datos del Acudiente"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "ha-participado-antes-en-programas-stea-o-de-pensamiento-computacional",
+                            "etiqueta": "¿Ha participado antes en programas STEAM o de pensamiento computacional?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "checkbox",
+                            "nombre": "que-actividades-tecnologicas-le-interesan",
+                            "etiqueta": "¿Qué actividades tecnológicas le interesan? (Marcar las que apliquen)",
+                            "opciones": [
+                                "Programación básica",
+                                "Robótica educativa",
+                                "Diseño de videojuegos",
+                                "Ciencia y experimentos",
+                                "Inteligencia Artificial para niños",
+                                "Otras"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false,
+                            "selecccionMultiple": true
+                        }
+                    ],
+                    "titulo": "Intereses y Conocimientos"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "dias-y-horarios-disponibles",
+                            "etiqueta": "Días y horarios disponibles",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "cuenta-con-acceso-a-computadora-o-tablet-en-casa",
+                            "etiqueta": "¿Cuenta con acceso a computadora o tablet en casa?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "cuenta-con-acceso-a-internet-en-casa",
+                            "etiqueta": "¿Cuenta con acceso a internet en casa?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Disponibilidad y Acceso a Tecnología"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "por-que-desea-participar-en-el-taller-de-pensamiento-computacional",
+                            "etiqueta": "¿Por qué desea participar en el taller de pensamiento computacional?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "cual-es-su-expectativa-sobre-el-programa",
+                            "etiqueta": "¿Cúal es su expectativa sobre el programa?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Motivación"
+                }
+            ]
+        }
+    },
+    {
+        "id": 5,
+        "name": "Programa de Factoría de Software",
+        "description": "Apoyo académico para niños, niñas y adolescentes con dificultades en su proceso de aprendizaje escolar.",
+        "longDescription": "Las Jornadas de Refuerzo están diseñadas para fortalecer el aprendizaje de niños y jóvenes a través de estrategias dinámicas e interdisciplinarias. El enfoque práctico y la resolución de problemas en situaciones reales permiten un desarrollo integral, trabajando en conjunto con las familias para lograr mejores resultados académicos.",
+        "requirements": [
+            "Jóvenes entre 16 y 29 años",
+            "Interés en tecnología y programación",
+            "Compromiso con el desarrollo comunitario",
+            "Disponibilidad para participar en todo el ciclo de formación"
+        ],
+        "benefits": [
+            "Formación técnica en desarrollo de software",
+            "Experiencia práctica en proyectos reales",
+            "Mentoría de profesionales del sector",
+            "Acceso a equipos y herramientas tecnológicas",
+            "Posibilidades de vinculación laboral o emprendimiento"
+        ],
+        "specificInformation": {
+            "secciones": [
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "modalidad-de-vinculacion",
+                            "etiqueta": "Modalidad de vinculación",
+                            "opciones": [
+                                "Pasantía",
+                                "Voluntariado"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "institucion-educativa",
+                            "etiqueta": "Institución educativa",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "programa-academico",
+                            "etiqueta": "Programa académico",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "semestre-o-nivel-actual",
+                            "etiqueta": "Semestre o nivel actual",
+                            "opciones": [
+                                "Primero",
+                                "Segundo",
+                                "Tercero",
+                                "Cuarto",
+                                "Quinto",
+                                "Sexto",
+                                "Septimo",
+                                "Octavo",
+                                "Noveno",
+                                "Decimo",
+                                ""
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "select",
+                            "nombre": "tiempo-disponible-semanalmente",
+                            "etiqueta": "Tiempo disponible semanalmente",
+                            "opciones": [
+                                "menos de 4 horas semanales",
+                                "5 horas semanales",
+                                "6 horas semanales",
+                                "7 o mas horas semanales"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Información Academica"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "checkbox",
+                            "nombre": "conocimientos-en-tecnologias-de-desarrollo",
+                            "etiqueta": "Conocimientos en tecnologías de desarrollo (Marca las que apliquen)",
+                            "opciones": [
+                                "Desarrollo web (HTML, CSS, Javascript)",
+                                "Bases de datos (MySQL, PostgreSQL, MongoDB, etc.)",
+                                "Inteligencia Artificial / Machine Learning",
+                                "Despliegue (Servicios Cloud, Automatizacion, Contenedores, Despliegue continuo)",
+                                "Desarrollo móvil (Android, iOS, Flutter, React Native)",
+                                "Ciberseguridad",
+                                "Otras"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false,
+                            "seleccionMultiple": true
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "proyectos-realizados",
+                            "etiqueta": "Proyectos realizados (breve descripcion o enlaces)",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Experiencia y Habilidades"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "por-que-desea-vincularse-a-la-factoria-de-software",
+                            "etiqueta": "¿Por qué desea vincularse a la factoría de software?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "checkbox",
+                            "nombre": "areas-de-interes-en-el-desarrollo-de-software",
+                            "etiqueta": "Áreas de interés en el desarrollo de software",
+                            "opciones": [
+                                "Desarrollo de aplicaciones ",
+                                "Bases de datos y Big Data",
+                                "Inteligencia Artificial y Aprendizaje automatico",
+                                "Ciberseguridad",
+                                "Internet de las cosas (IoT)",
+                                "Blockchain y Criptomonedas",
+                                "Software para Educación e Inclusión",
+                                "Computación en la Nube y DevOps",
+                                "Realidad Virtual y Aumentada",
+                                " Ingeniería de Software y Metodologías de desarrollo",
+                                "Otras"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false,
+                            "seleccionMultiple": true
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "tienes-experiencia-en-trabajo-colaborativo-y-metodologias-agiles",
+                            "etiqueta": "¿Tienes experiencia en trabajo colaborativo y metodologías ágiles?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Motivación o Intereses"
+                }
+            ]
+        }
+    },
+    {
+        "id": 6,
+        "name": "Programa de Voluntariado Social",
+        "description": "Oportunidades para contribuir con tiempo y talento en proyectos sociales de impacto comunitario.",
+        "longDescription": "El voluntariado social de la fundación consiste en la movilización de profesionales y ciudadanos comprometidos que, durante los fines de semana, visitan espacios donde se encuentran personas vulnerables con dificultades para acceder a alimentos. El objetivo es brindar apoyo solidario mediante la entrega de alimentos como chocolate, pan, huevos y envueltos, promoviendo un acto de empatía que contribuye a reducir la desigualdad y mejorar la calidad de vida de las personas en situación de vulnerabilidad. Esta labor es realizada generalmente los días sábado o domingo y permite canalizar esfuerzos hacia los más necesitados, contribuyendo a construir una sociedad más humana y equitativa.",
+        "requirements": [
+            "Personas mayores de 18 años",
+            "Compromiso con los valores de solidaridad y respeto",
+            "Disponibilidad de tiempo según el área de voluntariado",
+            "Disposición para trabajar en equipo y aprender constantemente"
+        ],
+        "benefits": [
+            "Formación en acción social y voluntariado",
+            "Experiencia práctica en proyectos de impacto",
+            "Desarrollo de habilidades personales y profesionales",
+            "Certificación de las horas de voluntariado",
+            "Participación en una red de agentes de cambio social"
+        ],
+        "specificInformation": {
+            "secciones": [
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "tiene-disponibilidad-de-tiempo-completo-o-parcial",
+                            "etiqueta": "¿Tiene disponibilidad de tiempo completo o parcial?",
+                            "opciones": [
+                                "Tiempo completo",
+                                "Tiempo parcial",
+                                "Fines de semana",
+                                "Días específicos"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "checkbox",
+                            "nombre": "cuales-dias-especificos",
+                            "etiqueta": "¿Cuáles días específicos?",
+                            "opciones": [
+                                "Lunes",
+                                "Martes",
+                                "Miercoles",
+                                "Jueves",
+                                "Viernes",
+                                "Sabado",
+                                "Domingo"
+                            ],
+                            "condiciones": [
+                                {
+                                    "campo": "tiene-disponibilidad-de-tiempo-completo-o-parcial",
+                                    "valor": "Días específicos"
+                                }
+                            ],
+                            "obligatorio": false,
+                            "seleccionMultiple": true
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "horas-disponibles-por-semana",
+                            "etiqueta": "Horas disponibles por semana",
+                            "opciones": [
+                                "menos de 4 horas semanales",
+                                "6 horas semanales",
+                                "7 horas semanales",
+                                "8 o mas horas semanales"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Información de disponibilidad"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "checkbox",
+                            "nombre": "seleccione-el-area-en-la-que-deseas-participar",
+                            "etiqueta": "Seleccione el área en la que deseas participar",
+                            "opciones": [
+                                "Musica",
+                                "Danza",
+                                "Manualidades",
+                                "Maquillaje",
+                                "Dibujo",
+                                "Otro"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false,
+                            "seleccionMultiple": true
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "cual",
+                            "etiqueta": "¿Cúal?",
+                            "opciones": [],
+                            "condiciones": [
+                                {
+                                    "campo": "seleccione-el-area-en-la-que-deseas-participar",
+                                    "valor": "Otro"
+                                }
+                            ],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Áreas de interés"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "describe-brevemente-las-habilidades-conocimientos-o-experiencias-que-puedas-aportar",
+                            "etiqueta": "Describe brevemente las habilidades, conocimientos o experiencias que puedas aportar",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Habilidades y Conocimiento"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "fundacion-organizacion",
+                            "etiqueta": "Fundación/Organización",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "funcion-desempeñada",
+                            "etiqueta": "Funcion desempeñada",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "tiempo-de-servicio",
+                            "etiqueta": "Tiempo de servicio",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Experiencia previa como voluntario"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "nombre1",
+                            "etiqueta": "Nombre",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "telefono1",
+                            "etiqueta": "Telefono",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "nombre2",
+                            "etiqueta": "Nombre",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "telefono2",
+                            "etiqueta": "Telefono",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Referencias personales (opcional)"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "por-que-deseas-participar-como-voluntario-en-esta-fundacion",
+                            "etiqueta": "¿Por qué deseas participar como voluntario en esta fundación?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Motivación"
+                }
+            ]
+        }
+    },
+    {
+        "id": 7,
+        "name": "Programa Economía Plateada",
+        "description": "Apoyo integral para adultos mayores en el desarrollo de proyectos productivos y bienestar.",
+        "longDescription": "El Programa Economía Plateada busca integrar a personas mayores de 60 años en el desarrollo de emprendimientos sostenibles, aprovechando sus conocimientos y tradiciones para fortalecer el turismo local. A través de actividades como el turismo rural, la gastronomía autóctona y la narración de historias, los participantes podrán ofrecer experiencias auténticas que promuevan la identidad cultural y atraigan visitantes.",
+        "requirements": [
+            "Personas mayores de 60 años",
+            "Interés en desarrollar actividades productivas",
+            "Compromiso con el proceso formativo",
+            "Residir en la zona de influencia del programa"
+        ],
+        "benefits": [
+            "Formación en emprendimiento adaptada a adultos mayores",
+            "Educación financiera y digital",
+            "Apoyo para el desarrollo de proyectos productivos",
+            "Actividades de bienestar físico y mental",
+            "Espacios de socialización e intercambio de experiencias"
+        ],
+        "specificInformation": {
+            "secciones": [
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "es-pensionado-pensionada",
+                            "etiqueta": "¿Es pensionado/a?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "cual-es-su-actividad-economica-actual",
+                            "etiqueta": "¿Cuál es su actividad económica actual?",
+                            "opciones": [],
+                            "condiciones": [
+                                {
+                                    "campo": "es-pensionado-pensionada",
+                                    "valor": "No"
+                                }
+                            ],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "ha-trabajado-anteriormente-en-algun-sector-especificos",
+                            "etiqueta": "¿Ha trabajado anteriormente en algún sector específico?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "recibe-ingresos-adicionales",
+                            "etiqueta": "¿Recibe ingresos adicionales?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Situación Económica y Laboral"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "checkbox",
+                            "nombre": "areas-de-interes-para-el-programa",
+                            "etiqueta": "Áreas de interés para el programa (Marca las que apliquen)",
+                            "opciones": [
+                                "Emprendimiento y negocios",
+                                "Educacion financiera",
+                                "Tecnología y apoyo comunitario",
+                                "Voluntariado y apoyo comunitario",
+                                "Salud y bienestar",
+                                "Otras"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false,
+                            "seleccionMultiple": true
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "habilidades-y-conocimientos-previos",
+                            "etiqueta": "Habilidades y conocimientos previos",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Intereses y Habilidades"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "cuanto-tiempo-podria-dedicar-al-programa-semanalmente",
+                            "etiqueta": "¿Cuánto tiempo podria dedicar al programa semanalmente?",
+                            "opciones": [
+                                "menos de 4 horas semanales",
+                                "5 horas semanales",
+                                "6 horas semanales",
+                                "7 o mas horas semanales"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "por-que-desea-participar-en-el-programa-de-economia-plateada",
+                            "etiqueta": "¿Por qué desea participar en el programa de económia plateada?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "que-espera-lograr-con-su-participacion-en-el-programa",
+                            "etiqueta": "¿Qué espera lograr con su participación en el programa?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Disponibilidad y Motivación"
+                }
+            ]
+        }
+    },
+    {
+        "id": 8,
+        "name": "Programa Cultural",
+        "description": "Formación en música, danza, manualidades y otras expresiones artísticas para el desarrollo cultural de la comunidad.",
+        "longDescription": "El desarrollo de la cultura a través de las artes, el dibujo, las manualidades, la danza y la belleza, entre otros, contribuye a los Objetivos de Desarrollo Sostenible (ODS), fortaleciendo habilidades blandas esenciales como la creatividad, el trabajo en equipo, la comunicación y la resiliencia. Estas competencias son clave para la empleabilidad y el bienestar social (ODS 8 y 10). Además, la inclusión de programas radiales amplía el impacto cultural al fomentar el pensamiento crítico y la expresión oral, promoviendo la educación de calidad (ODS 4), el acceso a la información (ODS 16) y la integración de comunidades diversas.",
+        "requirements": [
+            "Personas de todas las edades interesadas en actividades culturales",
+            "Compromiso con el proceso de aprendizaje",
+            "Disponibilidad para asistir a los talleres programados",
+            "Participación en muestras artísticas comunitarias"
+        ],
+        "benefits": [
+            "Formación en diversas disciplinas artísticas",
+            "Materiales básicos incluidos",
+            "Participación en eventos culturales",
+            "Desarrollo de habilidades creativas",
+            "Integración en redes culturales locales"
+        ],
+        "specificInformation": {
+            "secciones": [
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "nivel-educativo",
+                            "etiqueta": "Nivel educativo",
+                            "opciones": [
+                                "No tuvo estudio",
+                                "Primaria",
+                                "Secundaria",
+                                "Técnico",
+                                "Técnologo",
+                                "Titulo Universitario",
+                                "Especialización",
+                                "Maestria",
+                                "Doctorado"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "ocupacion",
+                            "etiqueta": "Ocupación",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Datos socioeconómicos"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "checkbox",
+                            "nombre": "seleccione-el-area-en-la-que-deseas-participar",
+                            "etiqueta": "Seleccione el área en la que deseas participar",
+                            "opciones": [
+                                "Musica",
+                                "Danzas",
+                                "Manualidades",
+                                "Maquillaje",
+                                "Dibujo",
+                                "Otro"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false,
+                            "seleccionMultiple": true
+                        }
+                    ],
+                    "titulo": "Áreas de Interés"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "has-recibido-formacion-previa-en-esta-area",
+                            "etiqueta": "¿Ha recibido formación previa en esta área?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "especifique-cual1",
+                            "etiqueta": "Especifique cual",
+                            "opciones": [],
+                            "condiciones": [
+                                {
+                                    "campo": "has-recibido-formacion-previa-en-esta-area",
+                                    "valor": "Si"
+                                }
+                            ],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "perteneces-o-has-pertenecido-a-algun-grupo-cultura-o-artistico",
+                            "etiqueta": "¿Pertenece o ha pertenecido a algún grupo cultural o artístico?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "especifique-cual2",
+                            "etiqueta": "Especifique cual",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Experiencia en el área seleccionada"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "checkbox",
+                            "nombre": "dias-disponibles-para-participar",
+                            "etiqueta": "Días disponibles para participar",
+                            "opciones": [
+                                "Lunes",
+                                "Martes",
+                                "Miercoles",
+                                "Jueves",
+                                "Viernes",
+                                "Sabado",
+                                "Domingo"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false,
+                            "seleccionMultiple": true
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "motivacion-para-participar-en-el-programa",
+                            "etiqueta": "Motivación para participar en el programa",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "que-esperas-aprender-o-desarrollar-en-este-programa",
+                            "etiqueta": "¿Qué esperas aprender o desarrollar en este programa?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Disponibilidad y Expectativas"
+                }
+            ]
+        }
+    },
+    {
+        "id": 9,
+        "name": "Programa de Seguridad Alimentaria",
+        "description": "Implementación de sistemas agrícolas sostenibles para mejorar la producción, distribución y acceso a alimentos nutritivos.",
+        "longDescription": "El Programa de Seguridad Alimentaria con Tecnología Inteligente tiene como objetivo fortalecer la seguridad alimentaria mediante la implementación de buenas prácticas de cultivo, respaldadas por hardware y software especializado. El programa brinda un acompañamiento integral a los agricultores en procesos de producción, capacitación, transformación y comercialización, optimizando las prácticas agrícolas a través de tecnologías innovadoras. Se utiliza una plataforma digital para monitorear variables clave del cultivo, permitiendo evidenciar una producción limpia y sostenible.",
+        "requirements": [
+            "Agricultores o personas con interés en la producción de alimentos",
+            "Acceso a tierra cultivable (propia o comunitaria)",
+            "Compromiso con prácticas agrícolas sostenibles",
+            "Disponibilidad para participar en capacitaciones técnicas"
+        ],
+        "benefits": [
+            "Insumos agrícolas y semillas de calidad",
+            "Capacitación en técnicas de cultivo sostenible",
+            "Asistencia técnica durante todo el ciclo productivo",
+            "Conexión con mercados locales",
+            "Apoyo para la implementación de sistemas de riego eficientes"
+        ],
+        "specificInformation": {
+            "secciones": [
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "es-agricultor",
+                            "etiqueta": "¿Es agricultor/a?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "cuenta-con-tierras-disponibles-para-participar-en-el-cultivo-del-proyecto",
+                            "etiqueta": "¿Cuenta con tierras disponibles para participar en el cultivo del proyecto?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "cuantas-hectareas",
+                            "etiqueta": "¿Cuántas hectáreas?",
+                            "opciones": [],
+                            "condiciones": [
+                                {
+                                    "campo": "cuenta-con-tierras-disponibles-para-participar-en-el-cultivo-del-proyecto",
+                                    "valor": "Si"
+                                }
+                            ],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "en-que-piso-termico-o-clima-se-encuentran-sus-tierras",
+                            "etiqueta": "¿En qué piso térmico o clima se encuentran sus tierras?",
+                            "opciones": [
+                                "Cálido (0 - 1.000 m.s.n.m.)",
+                                "Medio (1.000 - 2.000 m.s.n.m.)",
+                                "Frío (2.000 - 3.000 m.s.n.m.)",
+                                "Páramo (+3.000 m.s.n.m.)"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "tiene-actualmente-una-actividad-de-cultivo-especifica",
+                            "etiqueta": "¿Tiene actualmente una actividad de cultivo específica?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "que-tipo-de-cultivos-realiza",
+                            "etiqueta": "¿Qué tipo de cultivos realiza?",
+                            "opciones": [],
+                            "condiciones": [
+                                {
+                                    "campo": "tiene-actualmente-una-actividad-de-cultivo-especifica",
+                                    "valor": "Si"
+                                }
+                            ],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "ha-participado-en-otros-proyectos-de-seguridad-alimentaria-o-agricola",
+                            "etiqueta": "¿Ha participado en otros proyectos de seguridad alimentaria o agrícolas?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "en-cuales",
+                            "etiqueta": "¿En cuales?",
+                            "opciones": [],
+                            "condiciones": [
+                                {
+                                    "campo": "ha-participado-en-otros-proyectos-de-seguridad-alimentaria-o-agricola",
+                                    "valor": "Si"
+                                }
+                            ],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Situación Productiva y Agrícola"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "radio",
+                            "nombre": "cuenta-con-acceso-a-riego-en-sus-tierras",
+                            "etiqueta": "¿Cuenta con acceso a riego en sus tierras?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "dispone-de-herramientas-o-maquinaria-agricola",
+                            "etiqueta": "¿Dispone de herramientas o maquinaria agrícola?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "cuales",
+                            "etiqueta": "¿Cuáles?",
+                            "opciones": [],
+                            "condiciones": [
+                                {
+                                    "campo": "dispone-de-herramientas-o-maquinaria-agricola",
+                                    "valor": "Si"
+                                }
+                            ],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "cuenta-con-acceso-a-la-asistencia-tecnica-o-capacitacion-agricola",
+                            "etiqueta": "¿Cuenta con acceso a la asistencia técnica o capacitación agrícola?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Infraestructura y Recursos"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "por-que-desea-participar-en-el-programa-de-seguridad-alimetaria",
+                            "etiqueta": "¿Por qué desea participar en el Programa de Seguridad Alimentaria?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "cuanto-tiempo-podria-dedicar-al-programa-semanalmente",
+                            "etiqueta": "¿Cuánto tiempo podría dedicar al programa semanalmente?",
+                            "opciones": [
+                                "menos de 4 horas semanales",
+                                "5 horas semanales",
+                                "6 horas semanales",
+                                "7 o mas horas semanales"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "que-espera-lograr-con-su-participacion-en-el-programa",
+                            "etiqueta": "¿Qué espera lograr con su participación en el programa?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Motivación y Disponibilidad"
+                }
+            ]
+        }
+    },
+    {
+        "id": 4,
+        "name": "Programa de Jornadas de Refuerzo Escolar",
+        "description": "Apoyo académico para niños, niñas y adolescentes con dificultades en su proceso de aprendizaje escolar.",
+        "longDescription": "Las Jornadas de Refuerzo están diseñadas para fortalecer el aprendizaje de niños y jóvenes a través de estrategias dinámicas e interdisciplinarias. El enfoque práctico y la resolución de problemas en situaciones reales permiten un desarrollo integral, trabajando en conjunto con las familias para lograr mejores resultados académicos.",
+        "requirements": [
+            "Niños, niñas y adolescentes en edad escolar",
+            "Presentar dificultades en una o más áreas académicas",
+            "Compromiso de asistencia regular a las jornadas",
+            "Participación de padres o acudientes en el proceso"
+        ],
+        "benefits": [
+            "Atención personalizada según necesidades específicas",
+            "Materiales educativos complementarios",
+            "Desarrollo de hábitos de estudio efectivos",
+            "Seguimiento del progreso académico",
+            "Coordinación con docentes de la institución educativa"
+        ],
+        "specificInformation": {
+            "secciones": [
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "nombre-completo",
+                            "etiqueta": "Nombre completo",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "relacion-con-el-niño-niña",
+                            "etiqueta": "Relacion con el niño/niña",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "telefono-de-contacto-acudiente",
+                            "etiqueta": "Teléfono de contacto",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "correo-electronico-acudiente",
+                            "etiqueta": "Correo electrónico",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Datos del Acudiente"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "checkbox",
+                            "nombre": "en-que-areas-necesita-apoyo-el-niño-niña",
+                            "etiqueta": "¿En qué areas necesita apoyo el niño/niña (Marcar las que apliquen)",
+                            "opciones": [
+                                "Matemáticas",
+                                "Lectura y comprensión",
+                                "Escritura",
+                                "Ciencias naturales",
+                                "Inglés",
+                                "Otras"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false,
+                            "seleccionMultiple": true
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "ha-recibido-refuerzo-escolar-anteriormente",
+                            "etiqueta": "¿Ha recibido refuerzon escolar anteriormente?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "cuales-considera-que-son-las-principales-dificultades-academicas-del-niño-niña",
+                            "etiqueta": "¿Cuáles considera que son las principales dificultades academicas del niño/niña?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Información Académica y Necesidades de Refuerzo"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "dias-y-horarios-disponibles",
+                            "etiqueta": "Dias y horarios disponibles",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "cuenta-con-acceso-a-materiales-escolares-basicos-en-casa",
+                            "etiqueta": "¿Cuenta con acceso a materiales escolares básicos en casa?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "radio",
+                            "nombre": "requiere-apoyo-en-habitos-de-estudio-y-organizacion-del-tiempo",
+                            "etiqueta": "¿Requiere apoyo en hábitos de estudio y organización del tiempo?",
+                            "opciones": [
+                                "Si",
+                                "No"
+                            ],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Disponibilidad y Acceso a Recursos"
+                },
+                {
+                    "campos": [
+                        {
+                            "tipo": "text",
+                            "nombre": "por-que-desea-que-el-niño-niña-participe-en-las-jornadas-de-refuerzo",
+                            "etiqueta": "¿Por qué desea que el niño/niña participe en las jornadas de refuerzo?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        },
+                        {
+                            "tipo": "text",
+                            "nombre": "cuales-son-sus-expectativas-respecto-al-programa",
+                            "etiqueta": "¿Cuales son sus expectativas respecto al programa?",
+                            "opciones": [],
+                            "condiciones": [],
+                            "obligatorio": false
+                        }
+                    ],
+                    "titulo": "Motivación y Expectativas"
+                }
+            ]
+        }
+    }
+]

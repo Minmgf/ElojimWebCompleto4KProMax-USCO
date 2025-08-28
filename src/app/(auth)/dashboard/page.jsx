@@ -8,6 +8,7 @@ import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import NewsModal from '@/components/dashboard/NewsModal'
 import NewsData from '@/components/dashboard/NewsData'
+import ProgramsData from '@/components/dashboard/ProgramsData'
 
 const programs = [
     { value: 'Opcion 1', label: 'Opcion 1' },
@@ -103,9 +104,8 @@ const DashboardPage = () => {
                     <TabsContent value="programas" className="space-y-4">
                         <div className="">
                             <h2 className="text-2xl mt-6 uppercase font-bold">Gestión de Programas</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-                                <Select options={programs} />
-
+                            <div className="mt-6">
+                                <ProgramsData/>
                             </div>
                         </div>
                     </TabsContent>

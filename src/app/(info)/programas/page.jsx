@@ -1,209 +1,131 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Search } from "lucide-react";
+import ProgramsCard from "@/components/ProgramsCard";
+import ProgramModal from "@/components/ProgramModal";
 
-export default function ProgramFormModal({ program, onClose }) {
-  const [formData, setFormData] = useState({});
-  const [acceptTerms, setAcceptTerms] = useState(false);
+export default function ProgramsPage() {
+  const [programs, setPrograms] = useState([]);
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [selectedProgram, setSelectedProgram] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleChange = (campo, valor) => {
-    setFormData((prev) => ({ ...prev, [campo]: valor }));
+  // 🔹 Obtener programas desde la API
+  useEffect(() => {
+    async function fetchPrograms() {
+      try {
+        setLoading(true);
+        const res = await fetch("/api/programas/gestion-programas");
+        if (!res.ok) throw new Error("Error fetching programs");
+        const data = await res.json();
+        console.log("Programas cargados:", data);
+        setPrograms(data);
+      } catch (err) {
+        console.error("Error cargando programas:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPrograms();
+  }, []);
+
+  // 🔹 Filtrar por búsqueda
+  const filteredPrograms = programs.filter((program) =>
+    program.name?.toLowerCase().includes(query.toLowerCase())
+  );
+
+  // 🔹 Abrir modal con programa específico
+  const handleOpenModal = (program) => {
+    setSelectedProgram(program);
+    setIsModalOpen(true);
   };
 
-  const renderField = (campo) => {
-    switch (campo.tipo) {
-      case "text":
-      case "number":
-      case "email":
-      case "date":
-        return (
-          <div key={campo.nombre} className="flex flex-col mb-4">
-            <label className="font-semibold">{campo.etiqueta}</label>
-            <input
-              type={campo.tipo}
-              value={formData[campo.nombre] || ""}
-              onChange={(e) => handleChange(campo.nombre, e.target.value)}
-              className="border rounded px-3 py-2"
-              required={campo.requerido || false}
-            />
-          </div>
-        );
-      case "radio":
-        return (
-          <div key={campo.nombre} className="flex flex-col mb-4">
-            <label className="font-semibold">{campo.etiqueta}</label>
-            <div className="flex gap-4 mt-2">
-              {campo.opciones.map((op) => (
-                <label key={op} className="flex items-center gap-2">
-                  <input
-                    type="radio"
-                    name={campo.nombre}
-                    value={op}
-                    checked={formData[campo.nombre] === op}
-                    onChange={() => handleChange(campo.nombre, op)}
-                  />
-                  {op}
-                </label>
-              ))}
-            </div>
-          </div>
-        );
-      case "select":
-        return (
-          <div key={campo.nombre} className="flex flex-col mb-4">
-            <label className="font-semibold">{campo.etiqueta}</label>
-            <select
-              value={formData[campo.nombre] || ""}
-              onChange={(e) => handleChange(campo.nombre, e.target.value)}
-              className="border rounded px-3 py-2"
-            >
-              <option value="">Seleccione...</option>
-              {campo.opciones.map((op, idx) => (
-                <option key={idx} value={op}>{op}</option>
-              ))}
-            </select>
-          </div>
-        );
-      case "textarea":
-        return (
-          <div key={campo.nombre} className="flex flex-col mb-4">
-            <label className="font-semibold">{campo.etiqueta}</label>
-            <textarea
-              value={formData[campo.nombre] || ""}
-              onChange={(e) => handleChange(campo.nombre, e.target.value)}
-              className="border rounded px-3 py-2"
-            />
-          </div>
-        );
-      default:
-        return null;
-    }
+  // 🔹 Cerrar modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedProgram(null);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!acceptTerms) {
-      alert("Debes aceptar los términos y condiciones");
-      return;
-    }
-
-    const payload = {
-      programId: program.id,
-      ...formData
-    };
-
-    console.log("Datos a enviar:", payload);
-
-    const res = await fetch("/api/programas/registro-programas", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    if (res.ok) {
-      alert("Inscripción enviada con éxito");
-      onClose();
-    } else {
-      alert("Error al enviar la inscripción");
-    }
-  };
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-12 px-6 pt-24">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Cargando programas...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50 overflow-auto">
-      <div className="bg-white rounded-xl p-6 w-full max-w-3xl shadow-lg relative">
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-        >
-          ✕
-        </button>
-        {program ? (
-        <h2 className="text-2xl font-bold text-blue-800 mb-6">
-            Inscripción: {program.name}
-        </h2>
-        ) : (
-        <h2 className="text-2xl font-bold text-gray-500 mb-6">Cargando...</h2>
-        )}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* ✅ Bloque fijo: Datos personales */}
-          <div className="bg-gray-50 p-4 rounded-lg border">
-            <h3 className="text-lg font-bold mb-4">Datos Personales</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="font-semibold">Nombre completo</label>
-                <input
-                  type="text"
-                  value={formData.fullName || ""}
-                  onChange={(e) => handleChange("fullName", e.target.value)}
-                  className="border rounded px-3 py-2 w-full"
-                  required
-                />
-              </div>
-              <div>
-                <label className="font-semibold">Número de documento</label>
-                <input
-                  type="text"
-                  value={formData.numDocument || ""}
-                  onChange={(e) => handleChange("numDocument", e.target.value)}
-                  className="border rounded px-3 py-2 w-full"
-                  required
-                />
-              </div>
-              <div>
-                <label className="font-semibold">Teléfono</label>
-                <input
-                  type="text"
-                  value={formData.phone || ""}
-                  onChange={(e) => handleChange("phone", e.target.value)}
-                  className="border rounded px-3 py-2 w-full"
-                />
-              </div>
-              <div>
-                <label className="font-semibold">Correo electrónico</label>
-                <input
-                  type="email"
-                  value={formData.email || ""}
-                  onChange={(e) => handleChange("email", e.target.value)}
-                  className="border rounded px-3 py-2 w-full"
-                />
-              </div>
-            </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12 px-6 pt-24">
+      <div className="text-center mb-16">
+        <h1 className="text-4xl md:text-6xl font-bold text-blue-800 mb-6">
+          Nuestros programas sociales
+        </h1>
+        <p className="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto mb-10 leading-relaxed">
+          Explora nuestros programas sociales y únete a las iniciativas que están transformando vidas en nuestra comunidad.
+        </p>
+
+        {/* 🔍 Buscador */}
+        <div className="flex items-center max-w-lg mx-auto px-6 py-3 bg-white rounded-2xl border-2 shadow-lg border-gray-200 focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-200 transition-all duration-300">
+          <div className="flex items-center justify-center w-12 h-12">
+            <Search className="text-gray-500 h-6 w-6" />
           </div>
-
-          {/* ✅ Bloques dinámicos */}
-          {program?.specificInformation?.secciones?.map((sec, i) => (
-            <div key={i} className="bg-gray-50 p-4 rounded-lg border">
-                <h3 className="text-lg font-bold mb-4">{sec.titulo}</h3>
-                {sec.campos.map((campo) => renderField(campo))}
-            </div>
-            ))}
-
-
-          {/* ✅ Checkbox términos */}
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              checked={acceptTerms}
-              onChange={(e) => setAcceptTerms(e.target.checked)}
-              required
-            />
-            <span>
-              Acepto los{" "}
-              <a href="/terminos" className="text-blue-600 underline" target="_blank">
-                Términos y Condiciones
-              </a>
-            </span>
-          </div>
-
-          {/* ✅ Botón */}
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition"
-          >
-            Enviar inscripción
-          </button>
-        </form>
+          <input
+            type="text"
+            placeholder="Buscar programas..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="ml-4 flex-1 bg-transparent border-none outline-none text-lg text-gray-700 placeholder-gray-400 focus:ring-0"
+          />
+        </div>
       </div>
+
+      {/* 🔹 Grid de programas */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto px-4">
+        {filteredPrograms.length > 0 ? (
+          filteredPrograms.map((program) => (
+            <div key={program.id} onClick={() => handleOpenModal(program)} className="cursor-pointer group">
+              <ProgramsCard
+                title={program.name}
+                description={program.description}
+                requirements={program.requirements}
+                benefits={program.benefits}
+                specificInformation={program.specificInformation}
+                programId={program.id}
+              />
+            </div>
+          ))
+        ) : (
+          <div className="col-span-full text-center py-20">
+            <div className="bg-white rounded-3xl p-12 max-w-lg mx-auto shadow-lg border border-gray-100">
+              <div className="w-20 h-20 bg-gray-100 rounded-full mx-auto mb-6 flex items-center justify-center">
+                <Search className="h-10 w-10 text-gray-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-700 mb-4">
+                {query ? "No se encontraron resultados" : "No hay programas disponibles"}
+              </h3>
+              <p className="text-gray-500 text-lg leading-relaxed">
+                {query 
+                  ? `No se encontraron programas que coincidan con "${query}"`
+                  : "Por el momento no hay programas disponibles para mostrar."
+                }
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* 🔹 Modal del programa */}
+      {isModalOpen && selectedProgram && (
+        <ProgramModal
+          program={selectedProgram}
+          onClose={handleCloseModal}
+          isOpen={isModalOpen}
+        />
+      )}
     </div>
   );
 }
