@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import { FaUser } from "react-icons/fa";
 
 export default function ProgramModal({ program, onClose, isOpen }) {
   const [formData, setFormData] = useState({
@@ -277,15 +278,15 @@ export default function ProgramModal({ program, onClose, isOpen }) {
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50" />
         <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-y-auto flex flex-col">
             {/* 🔹 Header del modal */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-8">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6 md:p-8 flex-shrink-0">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <Dialog.Title className="text-3xl font-bold mb-3">
+                  <Dialog.Title className="text-2xl md:text-3xl font-bold mb-2">
                     {program?.name}
                   </Dialog.Title>
-                  <Dialog.Description className="text-blue-100 text-lg mb-4">
+                  <Dialog.Description className="text-sm md:text-base opacity-90">
                     {program?.description}
                   </Dialog.Description>
                   {program?.longDescription && (
@@ -303,7 +304,7 @@ export default function ProgramModal({ program, onClose, isOpen }) {
             </div>
 
             {/* 🔹 Contenido del modal */}
-            <div className="p-8 overflow-y-auto max-h-[calc(95vh-200px)]">
+            <div className="p-6 md:p-8">
               {loading && !programDetails ? (
                 <div className="text-center py-16">
                   <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-6"></div>
@@ -316,7 +317,7 @@ export default function ProgramModal({ program, onClose, isOpen }) {
                   <div className="bg-gradient-to-br from-gray-50 to-blue-50 p-8 rounded-2xl border border-gray-200">
                     <h3 className="text-2xl font-bold mb-6 text-gray-800 flex items-center gap-3">
                       <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                        <span className="text-white font-bold text-sm">👤</span>
+                        <span className="text-white font-bold text-sm"><FaUser /></span>
                       </div>
                       Datos Personales
                     </h3>
