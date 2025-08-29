@@ -1,18 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import { 
+    TYPE_DOCUMENT_OPTIONS,
+    GENDER_OPTIONS,
+    SOCIAL_STRATUM_OPTIONS,
+    ETNICAL_GROUP_OPTIONS,
+    DEFAULT_FORM_VALUES 
+} from "@/constants/enums";
 
 export default function ProgramFormModal({ program, onClose, onOpenForm }) {
     const [formData, setFormData] = useState({
-        typeDocument: "CC",
-        gender: "M",
+        typeDocument: DEFAULT_FORM_VALUES.typeDocument,
+        gender: DEFAULT_FORM_VALUES.gender,
         numDocument: "",
         fullName: "",
         birthDate: "",
         comune: "",
-        socialStratum: "",
+        socialStratum: DEFAULT_FORM_VALUES.socialStratum,
         age: "",
-        etnicalGroup: "",
+        etnicalGroup: DEFAULT_FORM_VALUES.etnicalGroup,
         address: "",
         phone: "",
         email: "",
@@ -88,9 +95,11 @@ export default function ProgramFormModal({ program, onClose, onOpenForm }) {
                                 onChange={handleChange}
                                 className="w-full p-2 border rounded"
                             >
-                                <option value="CC">Cédula</option>
-                                <option value="TI">Tarjeta de Identidad</option>
-                                <option value="CE">Cédula de Extranjería</option>
+                                {TYPE_DOCUMENT_OPTIONS.map(option => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                         <div>
@@ -101,9 +110,11 @@ export default function ProgramFormModal({ program, onClose, onOpenForm }) {
                                 onChange={handleChange}
                                 className="w-full p-2 border rounded"
                             >
-                                <option value="M">Masculino</option>
-                                <option value="F">Femenino</option>
-                                <option value="O">Otro</option>
+                                {GENDER_OPTIONS.map(option => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                     </div>
@@ -146,14 +157,23 @@ export default function ProgramFormModal({ program, onClose, onOpenForm }) {
                         className="w-full p-2 border rounded"
                     />
 
-                    <input
-                        type="text"
-                        name="socialStratum"
-                        placeholder="Estrato social"
-                        value={formData.socialStratum}
-                        onChange={handleChange}
-                        className="w-full p-2 border rounded"
-                    />
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Estrato social</label>
+                        <select
+                            name="socialStratum"
+                            value={formData.socialStratum}
+                            onChange={handleChange}
+                            className="w-full p-2 border rounded"
+                            required
+                        >
+                            <option value="">Seleccionar estrato</option>
+                            {SOCIAL_STRATUM_OPTIONS.map(option => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
                     <input
                         type="number"
@@ -165,14 +185,21 @@ export default function ProgramFormModal({ program, onClose, onOpenForm }) {
                         required
                     />
 
-                    <input
-                        type="text"
-                        name="etnicalGroup"
-                        placeholder="Grupo étnico"
-                        value={formData.etnicalGroup}
-                        onChange={handleChange}
-                        className="w-full p-2 border rounded"
-                    />
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Grupo étnico</label>
+                        <select
+                            name="etnicalGroup"
+                            value={formData.etnicalGroup}
+                            onChange={handleChange}
+                            className="w-full p-2 border rounded"
+                        >
+                            {ETNICAL_GROUP_OPTIONS.map(option => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
                     <input
                         type="text"

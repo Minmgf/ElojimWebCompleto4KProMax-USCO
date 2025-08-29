@@ -3,18 +3,25 @@ import { useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { FaUser } from "react-icons/fa";
+import { 
+  TYPE_DOCUMENT_OPTIONS,
+  GENDER_OPTIONS,
+  SOCIAL_STRATUM_OPTIONS,
+  ETNICAL_GROUP_OPTIONS,
+  DEFAULT_FORM_VALUES 
+} from "@/constants/enums";
 
 export default function ProgramModal({ program, onClose, isOpen }) {
   const [formData, setFormData] = useState({
-    typeDocument: "CC",
-    gender: "MASCULINO",
+    typeDocument: DEFAULT_FORM_VALUES.typeDocument,
+    gender: DEFAULT_FORM_VALUES.gender,
     numDocument: "",
     fullName: "",
     birthDate: "",
     comune: "Comuna 1",
-    socialStratum: "E1",
+    socialStratum: DEFAULT_FORM_VALUES.socialStratum,
     age: "",
-    etnicalGroup: "Ninguno",
+    etnicalGroup: DEFAULT_FORM_VALUES.etnicalGroup,
     address: "",
     phone: "",
     email: "",
@@ -383,10 +390,11 @@ export default function ProgramModal({ program, onClose, isOpen }) {
                           className="border rounded-lg px-4 py-3 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                           required
                         >
-                          <option value="CC">Cédula de Ciudadanía</option>
-                          <option value="TI">Tarjeta de Identidad</option>
-                          <option value="CE">Cédula de Extranjería</option>
-                          <option value="PP">Pasaporte</option>
+                          {TYPE_DOCUMENT_OPTIONS.map(option => (
+                            <option key={option.value} value={option.value}>
+                              {option.label}
+                            </option>
+                          ))}
                         </select>
                       </div>
                       <div>
@@ -401,9 +409,11 @@ export default function ProgramModal({ program, onClose, isOpen }) {
                           className="border rounded-lg px-4 py-3 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                           required
                         >
-                          <option value="MASCULINO">Masculino</option>
-                          <option value="FEMENINO">Femenino</option>
-                          <option value="OTRO">Otro</option>
+                          {GENDER_OPTIONS.map(option => (
+                            <option key={option.value} value={option.value}>
+                              {option.label}
+                            </option>
+                          ))}
                         </select>
                       </div>
                       <div>
@@ -483,12 +493,11 @@ export default function ProgramModal({ program, onClose, isOpen }) {
                           }
                           className="border rounded-lg px-4 py-3 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                         >
-                          <option value="E1">E1</option>
-                          <option value="E2">E2</option>
-                          <option value="E3">E3</option>
-                          <option value="E4">E4</option>
-                          <option value="E5">E5</option>
-                          <option value="E6">E6</option>
+                          {SOCIAL_STRATUM_OPTIONS.map(option => (
+                            <option key={option.value} value={option.value}>
+                              {option.label}
+                            </option>
+                          ))}
                         </select>
                       </div>
                       <div>
@@ -516,12 +525,11 @@ export default function ProgramModal({ program, onClose, isOpen }) {
                           }
                           className="border rounded-lg px-4 py-3 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                         >
-                          <option value="Ninguno">Ninguno</option>
-                          <option value="Indígena">Indígena</option>
-                          <option value="Afrocolombiano">Afrocolombiano</option>
-                          <option value="Raizal">Raizal</option>
-                          <option value="Palenquero">Palenquero</option>
-                          <option value="Gitano">Gitano</option>
+                          {ETNICAL_GROUP_OPTIONS.map(option => (
+                            <option key={option.value} value={option.value}>
+                              {option.label}
+                            </option>
+                          ))}
                         </select>
                       </div>
                       <div className="md:col-span-2">
