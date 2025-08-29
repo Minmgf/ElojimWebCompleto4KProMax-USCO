@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
 import { FaArrowRight } from "react-icons/fa6";
 
@@ -21,17 +22,21 @@ const Hero = () => {
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <button size="lg" className="flex items-center py-2 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white">
-                                Conoce más
-                                <FaArrowRight className="ml-2 h-5 w-5" />
-                            </button>
-                            <button
-                                size="lg"
-                                variant="outline"
-                                className="border-orange-500 py-2 px-4 rounded-xl text-orange-500 hover:bg-orange-100 bg-transparent"
-                            >
-                                Nuestros programas
-                            </button>
+                            <Link href="/noticias">
+                                <button size="lg" className="flex items-center py-2 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white">
+                                    Conoce más
+                                    <FaArrowRight className="ml-2 h-5 w-5" />
+                                </button>
+                            </Link>
+                            <Link href="/programas">
+                                <button
+                                    size="lg"
+                                    variant="outline"
+                                    className="border-orange-500 py-2 px-4 rounded-xl text-orange-500 hover:bg-orange-100 bg-transparent"
+                                >
+                                    Nuestros programas
+                                </button>
+                            </Link>
                         </div>
                     </div>
 
